@@ -1,5 +1,5 @@
 ﻿using Discord.Commands;
-using System.IO;
+using RulesBot.Core.Utils;
 using System.Threading.Tasks;
 
 namespace RulesBot.Commands
@@ -8,6 +8,6 @@ namespace RulesBot.Commands
     {
         [Command("prime")]
         public Task PrimeChime()
-            => Context.Channel.SendFileAsync(Path.Combine("Assets", "prime_chime.png"), "Did someone say [Prime Chime]?");
+            => Context.Channel.SendFileAsync(FileUtils.MakeAbsolute("Assets", "prime_chime.png"), "Did someone say [Prime Chime]?");
     }
 }
