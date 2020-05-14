@@ -1,11 +1,8 @@
-﻿using Discord;
-using Discord.WebSocket;
-using RulesBot.Core;
+﻿using RulesBot.Core;
 using RulesBot.Core.Data;
+using RulesBot.Core.Utils;
 using System;
 using System.IO;
-using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,10 +15,25 @@ namespace RulesBot
         {
             "logs"
         };
+
+        public static bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+        public static readonly DateTime Started = DateTime.UtcNow;
+
         public async static Task Main()
         {
-            DIHost.Setup();
             Log.LogEmitted += Log_LogEmitted;
+            Log.Info("RulesBot started, press ^C to exit");
+            DIHost.Setup();
 
             var mre = new ManualResetEvent(false);
             Console.CancelKeyPress += (s, e) =>
@@ -30,12 +42,12 @@ namespace RulesBot
                 mre.Set();
             };
 
+            ConfigurationHost.Initialize();
+
             EnsureDirectories();
 
-            var config = DIHost.Get<AppConfig>();
-            LogFile = Path.Combine("logs",$"log_{config.CurrentRun:yyyyMMddHHmmss}.log");
+            LogFile = FileUtils.MakeAbsolute("logs", $"log_{Program.Started:yyyyMMddHHmmss}.log");
 
-            Log.Info("RulesBot started, press ^C to exit");
 
             var bot = DIHost.Get<DiscordBot>();
             await bot.Start();

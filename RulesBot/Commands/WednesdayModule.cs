@@ -1,4 +1,5 @@
 ﻿using Discord.Commands;
+using RulesBot.Core;
 using RulesBot.Core.Data;
 using RulesBot.Core.Extensions;
 using System;
@@ -9,12 +10,14 @@ namespace RulesBot.Commands
 {
     public class WednesdayModule: ModuleBase<SocketCommandContext>
     {
-        private readonly AppConfig Configuration;
         private static int Stubbornness = 0;
         private static DateTime LastStubbornness;
-        public WednesdayModule(AppConfig config)
+
+        private readonly AppConfig Configuration;
+
+        public WednesdayModule()
         {
-            Configuration = config;
+            Configuration = ConfigurationHost.Current;
         }
 
         [Command("wednesday")]
@@ -31,12 +34,12 @@ namespace RulesBot.Commands
                 else
                 {
                     Stubbornness = 0;
-                    return Context.Channel.SendMessageAsync($"FINE >:(\n\n{Configuration.Frogs.Random()}");
+                    return Context.Channel.SendMessageAsync($"FINE >:(\n\n{Configuration.WednesdayFrogs.Random()}");
                 }
             }
 
 
-            return Context.Channel.SendMessageAsync($"It is Wednesday, my dudes\n\n{Configuration.Frogs.Random()}");
+            return Context.Channel.SendMessageAsync($"It is Wednesday, my dudes\n\n{Configuration.WednesdayFrogs.Random()}");
         }
     }
 }
