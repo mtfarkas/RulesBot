@@ -67,7 +67,7 @@ namespace RulesBot
         private static void EnsureDirectories()
         {
             foreach (var dir in AppDirectories)
-                Directory.CreateDirectory(dir);
+                Directory.CreateDirectory(FileUtils.MakeAbsolute(dir));
         }
 
         private static void Log_LogEmitted(object sender, YAUL.Data.GenericEventArgs<string> e)
