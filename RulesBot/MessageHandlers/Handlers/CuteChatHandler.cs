@@ -3,6 +3,7 @@ using RulesBot.Core;
 using RulesBot.Core.Data;
 using RulesBot.Core.Extensions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RulesBot.MessageHandlers.Handlers
@@ -10,6 +11,11 @@ namespace RulesBot.MessageHandlers.Handlers
     public class CuteChatHandler : IMessageHandler
     {
         private readonly AppConfig Configuration;
+        private static readonly string[] TriggerWords = new string[]
+        {
+            "cute", "cutie"
+        };
+        
         public CuteChatHandler()
         {
             Configuration = ConfigurationHost.Current;
@@ -17,7 +23,7 @@ namespace RulesBot.MessageHandlers.Handlers
 
         public async Task<bool> Execute(SocketUserMessage message)
         {
-            if (!message.Content.Contains("cute", StringComparison.InvariantCultureIgnoreCase))
+            if (!TriggerWords.Any(item => message.Content.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
                 return false;
 
             string selectedPhrase = Configuration.CutePhrases.Random();
