@@ -1,5 +1,4 @@
 ﻿using RulesBot.Core;
-using RulesBot.Core.Data;
 using RulesBot.Core.Utils;
 using System;
 using System.IO;
@@ -33,6 +32,7 @@ namespace RulesBot
         {
             Log.LogEmitted += Log_LogEmitted;
             Log.Info("RulesBot started, press ^C to exit");
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             DIHost.Setup();
 
             var mre = new ManualResetEvent(false);
@@ -57,6 +57,11 @@ namespace RulesBot
             bot.Dispose();
 
             Log.Info("RulesBot exited gracefully");
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.Exception(e.ExceptionObject as Exception);
         }
 
         private static void EnsureDirectories()
