@@ -61,7 +61,7 @@ namespace RulesBot.Commands
 
                 for (int i = 0; i < count; i++)
                 {
-                    sb.AppendFormat("\t{0}) {1} - {2}\n", i + 1, articleTitles[i], articleUrls[i]);
+                    sb.AppendFormat("\t{0}) {1} - <{2}>\n", i + 1, articleTitles[i], articleUrls[i]);
                 }
 
                 await Context.Channel.SendMessageAsync(sb.ToString());
