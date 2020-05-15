@@ -31,6 +31,8 @@ namespace RulesBot
             MessageExecutor = new MessageExecutor();
             MessageExecutor.RegisterHandler(new Rule2Handler());
             MessageExecutor.RegisterHandler(new CuteChatHandler());
+            MessageExecutor.RegisterHandler(new StreetsQuoteHandler());
+
             MessageExecutor.RegisterHandler(new RandomVerbHandler());
 
             Client = new DiscordSocketClient(new DiscordSocketConfig

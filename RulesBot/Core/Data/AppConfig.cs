@@ -12,6 +12,7 @@ namespace RulesBot.Core.Data
         public IEnumerable<string> Rule2Phrases { get; set; }
         public IEnumerable<string> TwitchFriends { get; set; }
         public IEnumerable<string> CutePhrases { get; set; }
+        public IEnumerable<string> StreetsQuotes { get; set; }
         public string PlainHelpText { get; set; }
         public IEnumerable<TopicHelp> HelpTexts { get; set; }
     }

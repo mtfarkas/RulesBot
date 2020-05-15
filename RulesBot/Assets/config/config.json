@@ -6,8 +6,8 @@
   },
   "StreamNotifierSettings": {
     "Enabled": true,
-    "NotificationGuild": 129971607132176384,
-    "NotificationChannel": 710547501480017933
+    "NotificationGuild": 628327466284351510,
+    "NotificationChannel": 628342029424001024
   },
   "Verbs": [
     "Accept",
@@ -518,5 +518,22 @@
       "Topic": "prime",
       "HelpText": "Summons the Prime Chime into the chat."
     }
+  ],
+  "StreetsQuotes": [
+    "I've never SEEN a 1:13 and I never fucking will",
+    "1:12 baby Till the day I fucking die",
+    "I CLUTCHED the goddamn grenade launcher",
+    "Yea it's this one. Right here IT's THIS ONE",
+    "My insane pace. Right here! THIS is the 1:12 Right here!",
+    "DUUUUUUUDE WHAT A RUSH!",
+    "See how fast my pace is? Right in the FUCKING HEAD!",
+    "You see that CLUTCHNESS I AM FUCKING CCC-LUTCH!",
+    "Look at this fucking line I take. I'm like, \"YEAH baby. Let's fucking DO this.\"",
+    "The double. Body armor. Two quick ones. I already know I'm gettin' there on the perfect line",
+    "LOOK AT THE FUCKING PACE",
+    "Fifty Fourty-nine! mmph- FOURTY-SEVEN BABY! That's FUCKING right. That's FUCKING IT",
+    "Fucking PUMPED watching this one again I waited the cinema too 'cause I said \"oh my god it might be 1:12. And it FUCKING IS!!! IT FUUCKING IS baby",
+    "Dude I FUCKING just got Streets 1:12! It's not fucking comin' off YES!",
+    "I FUCKING DID IT THAT'S RIGHT! I SKIPPED 1:13 I'M A LEGEND. I AM A FUCKING L E G E N D I'm a FUCKING legend (YES!) I am a fucking legend"
   ]
 }
