@@ -66,7 +66,7 @@ namespace RulesBot
         {
             if (e.Stream.StartedAt.ToUniversalTime() < Program.Started) return;
 
-            string msg = $"{e.Channel} just went live!\n\n{e.Stream.Title}\nhttps://twitch.tv/{e.Channel}";
+            string msg = $"{e.Channel} just went live!\n=================================\n{e.Stream.Title}\nhttps://twitch.tv/{e.Channel}";
 
             var guild = DiscordClient.GetGuild(Configuration.StreamNotifierSettings.NotificationGuild);
             if(guild == null)
