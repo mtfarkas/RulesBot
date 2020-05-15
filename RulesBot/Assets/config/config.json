@@ -478,7 +478,18 @@
     "{0} is an award winning qt3.1416!",
     "Breaking News: An increased number of Cutie sightings have been reported today!",
     "Watch out! {0}'s cuteness goes straight to the heart!",
-    "C U T E C H A T!"
+    "C U T E C H A T!",
+    "The cuteness {0} emits is seriously c-c-clutch!",
+    "{0}, you is smart, you is kind, you is important, you is cute!",
+    "If {0} were a vegetable they would be a cutecumber.",
+    "Be advised that {0}'s cuteness is highly contagious and spreading fast.",
+    "{0} is cute: (c)aptivating (u)nique (t)alented (e)ffervescent.",
+    "{0} ist just as cute as a basket full of kitty cats and puppy dogs.",
+    "Whenever I want to focus on something cute I think about {0}.",
+    "{0} is the textbook example of a pure bred Cutie.",
+    "The cuteness of {0} radiates around them like a warm light.",
+    "If you're not sure whether you're cute or not, remember this: Yes. Yes you're super cute.",
+    "THE CUTE POGS ARE RAINING FROM THE HEAVENS FOR {0} AND EVERYONE AROUND THEM!"
   ],
   "TwitchFriends": [
     "YaGurlJen",
@@ -500,25 +511,6 @@
     "i feel mortally challenged",
     "i'm going to off myself",
     "i'm gonna off myself"
-  ],
-  "PlainHelpText": "DorxRulesBot\n\n\"Useful\" commands:\n**!help** -- Displays this message\n**!help <command>** -- Displays help text for commands\n**!wiki <keyword>**  -- Performs a Wikipedia search\n**!wednesday** -- It is Wednesday, my dudes\n**!prime** -- Summons the Prime Chime\n**!del <message id>** -- Deletes a comment from the bot with the specified ID\n**!uptime** -- Shows the bot's uptime",
-  "HelpTexts": [
-    {
-      "Topic": "help",
-      "HelpText": "I mean, it's pretty self explanatory"
-    },
-    {
-      "Topic": "wiki",
-      "HelpText": "Use the **!wiki** command to query Wikipedia for the 3 top results of the keywords. (Note: if you want to query using multiple keywords, put double quotes around them)\nExample usage:\n    **!wiki** snail => performs a search with the keyword \"snail\" and returns the 3 most popular results\n    **!wiki** \"red apple\" => performs a search with the keywords \"red apple\" and returns the 3 most popular results"
-    },
-    {
-      "Topic": "wednesday",
-      "HelpText": "Gives you a random wednesday gif."
-    },
-    {
-      "Topic": "prime",
-      "HelpText": "Summons the Prime Chime into the chat."
-    }
   ],
   "StreetsQuotes": [
     "I've never SEEN a 1:13 and I never fucking will",
