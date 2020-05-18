@@ -3,13 +3,13 @@ using Discord.Commands;
 using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
-using RulesBot.Core.Utils;
 using RulesBot.MessageHandlers;
 using RulesBot.MessageHandlers.Handlers;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using YAUL.Utilities;
 
 namespace RulesBot
 {
@@ -66,7 +66,7 @@ namespace RulesBot
             await CommandService.AddModulesAsync(Assembly.GetEntryAssembly(), DIHost.ServiceProvider);
             Log.Info("Registering modules done");
 
-            await Client.LoginAsync(TokenType.Bot, EnvironmentUtils.VariableOrThrow(Constants.Environment.DiscordBotToken));
+            await Client.LoginAsync(TokenType.Bot, EnvUtils.VariableOrThrow(Constants.Environment.DiscordBotToken));
 
             await Client.StartAsync();
 

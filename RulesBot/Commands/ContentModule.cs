@@ -3,13 +3,13 @@ using Flurl;
 using Flurl.Http;
 using RulesBot.Core;
 using RulesBot.Core.Data;
-using RulesBot.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using YAUL.Utilities;
 
 namespace RulesBot.Commands
 {
@@ -19,7 +19,7 @@ namespace RulesBot.Commands
 
         [Command("prime")]
         public Task PrimeChime()
-            => Context.Channel.SendFileAsync(FileUtils.MakeAbsolute("Assets", "prime_chime.png"), "Did someone say [Prime Chime]?");
+            => Context.Channel.SendFileAsync(PathUtils.MakeAbsolute("Assets", "prime_chime.png"), "Did someone say [Prime Chime]?");
 
         #region Reddit
         [Command("top")]

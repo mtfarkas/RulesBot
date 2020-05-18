@@ -2,9 +2,9 @@
 using Flurl.Http;
 using RulesBot.Core;
 using RulesBot.Core.Data;
-using RulesBot.Core.Extensions;
 using System;
 using System.Threading.Tasks;
+using YAUL.Extensions;
 
 namespace RulesBot.Commands
 {

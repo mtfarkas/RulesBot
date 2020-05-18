@@ -1,8 +1,8 @@
 ﻿using Discord.Commands;
 using RulesBot.Core;
-using RulesBot.Core.Extensions;
 using System;
 using System.Threading.Tasks;
+using YAUL.Extensions;
 
 namespace RulesBot.Commands
 {

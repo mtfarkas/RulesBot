@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 using RulesBot.Core.Data;
-using RulesBot.Core.Utils;
 using System;
 using System.IO;
 using System.Text;
-using System.Text.Json;
 using YAUL.Data;
+using YAUL.Utilities;
 
 namespace RulesBot.Core
 {
@@ -16,7 +15,7 @@ namespace RulesBot.Core
         public static event EventHandler<GenericEventArgs<AppConfig>> ConfigurationChanged;
         public static void Initialize()
         {
-            fsWatcher.Path = FileUtils.MakeAbsolute("Assets", "config");
+            fsWatcher.Path = PathUtils.MakeAbsolute("Assets", "config");
             fsWatcher.Filters.Add("*.json");
             fsWatcher.NotifyFilter = NotifyFilters.LastWrite;
             fsWatcher.Changed += OnConfigurationChange;
@@ -32,7 +31,7 @@ namespace RulesBot.Core
             string contents;
             try
             {
-                using var fileStream = File.Open(FileUtils.MakeAbsolute("Assets", "config", "config.json"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var fileStream = File.Open(PathUtils.MakeAbsolute("Assets", "config", "config.json"), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 using var streamReader = new StreamReader(fileStream, Encoding.UTF8);
                 contents = streamReader.ReadToEnd();
             }
@@ -43,6 +42,7 @@ namespace RulesBot.Core
             }
 
             JsonConvert.PopulateObject(contents, Current, new JsonSerializerSettings { ObjectCreationHandling = ObjectCreationHandling.Replace });
+            //JsonUtils.Populate(Current, contents);
             Log.Info("Configuration read successfully");
         }
 

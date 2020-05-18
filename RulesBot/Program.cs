@@ -1,9 +1,9 @@
 ﻿using RulesBot.Core;
-using RulesBot.Core.Utils;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using YAUL.Utilities;
 
 namespace RulesBot
 {
@@ -46,7 +46,7 @@ namespace RulesBot
 
             EnsureDirectories();
 
-            LogFile = FileUtils.MakeAbsolute("logs", $"log_{Program.Started:yyyyMMddHHmmss}.log");
+            LogFile = PathUtils.MakeAbsolute("logs", $"log_{Program.Started:yyyyMMddHHmmss}.log");
 
 
             var bot = DIHost.Get<DiscordBot>();
@@ -67,7 +67,7 @@ namespace RulesBot
         private static void EnsureDirectories()
         {
             foreach (var dir in AppDirectories)
-                Directory.CreateDirectory(FileUtils.MakeAbsolute(dir));
+                Directory.CreateDirectory(PathUtils.MakeAbsolute(dir));
         }
 
         private static void Log_LogEmitted(object sender, YAUL.Data.GenericEventArgs<string> e)

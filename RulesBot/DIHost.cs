@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RulesBot.Core.Extensions;
 using System;
+using YAUL.Extensions;
 
 namespace RulesBot
 {

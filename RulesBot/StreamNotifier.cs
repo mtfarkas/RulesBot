@@ -1,13 +1,12 @@
 ﻿using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
-using RulesBot.Core.Utils;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TwitchLib.Api;
 using TwitchLib.Api.Services;
 using TwitchLib.Api.Services.Events.LiveStreamMonitor;
+using YAUL.Utilities;
 
 namespace RulesBot
 {
@@ -24,8 +23,8 @@ namespace RulesBot
             DiscordClient = discordClient;
 
             TwitchAPI = new TwitchAPI();
-            TwitchAPI.Settings.ClientId = EnvironmentUtils.VariableOrThrow(Constants.Environment.TwitchClientId);
-            TwitchAPI.Settings.AccessToken = EnvironmentUtils.VariableOrThrow(Constants.Environment.TwitchBotToken);
+            TwitchAPI.Settings.ClientId = EnvUtils.VariableOrThrow(Constants.Environment.TwitchClientId);
+            TwitchAPI.Settings.AccessToken = EnvUtils.VariableOrThrow(Constants.Environment.TwitchBotToken);
 
             LiveStreamMonitor = new LiveStreamMonitorService(TwitchAPI, 20);
             LiveStreamMonitor.SetChannelsByName(Configuration.TwitchFriends.ToList());

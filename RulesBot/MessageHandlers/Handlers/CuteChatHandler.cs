@@ -1,10 +1,10 @@
 ﻿using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
-using RulesBot.Core.Extensions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using YAUL.Extensions;
 
 namespace RulesBot.MessageHandlers.Handlers
 {
