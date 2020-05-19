@@ -340,4 +340,6 @@ ASALocalRun/
 healthchecksdb
 
 RulesBot/Properties/launchSettings.json
-RulesBot/deploy/
+RulesBot/deploy/dist
+RulesBot/deploy/*.zip
+RulesBot/deploy/deploy-key.ppk
