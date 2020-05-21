@@ -3,6 +3,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
+using RulesBot.Core.Extensions;
 using RulesBot.MessageHandlers;
 using RulesBot.MessageHandlers.Handlers;
 using System;
@@ -131,7 +132,8 @@ namespace RulesBot
             if (Configuration.BotSettings.EnableChannelBlacklist
                 && Configuration.BotSettings.BlacklistedChannels.Contains(msg.Channel.Id)) return;
 
-            if (msg.HasCharPrefix(Configuration.BotSettings.CommandCharacter, ref argPos))
+            //if (msg.HasCharPrefix(Configuration.BotSettings.CommandCharacter, ref argPos) )
+            if (msg.ContainsCommand(Configuration.BotSettings.CommandCharacter, ref argPos) )
             {
                 Log.Info($"Message {msg.Content} was a command, attempting to execute");
                 var context = new SocketCommandContext(Client, msg);
