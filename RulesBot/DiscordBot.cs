@@ -4,6 +4,7 @@ using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
 using RulesBot.Core.Extensions;
+using RulesBot.Data;
 using RulesBot.MessageHandlers;
 using RulesBot.MessageHandlers.Handlers;
 using System;
@@ -22,11 +23,15 @@ namespace RulesBot
         private MessageExecutor MessageExecutor;
         private StreamNotifier StreamNotifier;
         private readonly AppConfig Configuration;
+
+        //private RulesBotContext Context;
         #endregion
 
         #region Ctor
-        public DiscordBot()
+        public DiscordBot(/*RulesBotContext context*/)
         {
+            //Context = context;
+
             Configuration = ConfigurationHost.Current;
 
             MessageExecutor = new MessageExecutor();

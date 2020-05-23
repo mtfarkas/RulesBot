@@ -15,9 +15,11 @@
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.2.0" />
     <PackageReference Include="flurl.http" Version="2.4.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
     <PackageReference Include="twitchlib.api" Version="3.1.3" />
-    <PackageReference Include="yaul" Version="1.0.5.1" />
+    <PackageReference Include="yaul" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>

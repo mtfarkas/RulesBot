@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RulesBot.Data;
 using System;
 using YAUL.Extensions;
+using YAUL.Utilities;
 
 namespace RulesBot
 {
@@ -14,12 +17,20 @@ namespace RulesBot
 
             ConfigureServices(services);
 
+            //ConfigureDbContext(services);
+
             ServiceProvider = services.BuildServiceProvider();
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<DiscordBot>();
+        }
+
+        private static void ConfigureDbContext(IServiceCollection services)
+        {
+            string connString = EnvUtils.VariableOrThrow(Constants.Environment.SqlConnectionString);
+            services.AddDbContext<RulesBotContext>(opt => opt.UseSqlite(connString));
         }
 
         public static T Get<T>(bool required = true)
