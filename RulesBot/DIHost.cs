@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RulesBot.Core.Repositories;
 using RulesBot.Data;
+using RulesBot.MessageHandlers;
+using RulesBot.MessageHandlers.Handlers;
 using System;
+using System.Reflection;
 using YAUL.Extensions;
 using YAUL.Utilities;
 
@@ -17,13 +21,16 @@ namespace RulesBot
 
             ConfigureServices(services);
 
-            //ConfigureDbContext(services);
+            ConfigureDbContext(services);
+
+            MessageExecutor.RegisterAssemblyHandlers(Assembly.GetExecutingAssembly(), services);
 
             ServiceProvider = services.BuildServiceProvider();
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPhraseRepository, PhraseRepository>();
             services.AddScoped<DiscordBot>();
         }
 

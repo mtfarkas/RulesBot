@@ -1,4 +1,6 @@
-﻿namespace RulesBot.Core.Data
+﻿using YAUL.Extensions;
+
+namespace RulesBot.Core.Data
 {
     public class JokeModel
     {
@@ -9,7 +11,7 @@
 
         public string Complete
         {
-            get => $"{Setup}\n{Punchline}";
+            get => $"{Setup.FirstCharToUpper()}\n{Punchline.FirstCharToUpper()}";
         }
     }
 }

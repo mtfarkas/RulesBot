@@ -1,6 +1,6 @@
 ﻿using Discord.WebSocket;
-using RulesBot.Core;
-using RulesBot.Core.Data;
+using RulesBot.Core.Repositories;
+using RulesBot.Data.Entities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,15 +10,15 @@ namespace RulesBot.MessageHandlers.Handlers
 {
     public class CuteChatHandler : IMessageHandler
     {
-        private readonly AppConfig Configuration;
         private static readonly string[] TriggerWords = new string[]
         {
             "cute", "cutie"
         };
         
-        public CuteChatHandler()
+        private readonly IPhraseRepository phraseRepository;
+        public CuteChatHandler(IPhraseRepository phraseRepository)
         {
-            Configuration = ConfigurationHost.Current;
+            this.phraseRepository = phraseRepository;
         }
 
         public async Task<bool> Execute(SocketUserMessage message)
@@ -26,7 +26,9 @@ namespace RulesBot.MessageHandlers.Handlers
             if (!TriggerWords.Any(item => message.Content.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
                 return false;
 
-            string selectedPhrase = Configuration.CutePhrases.Random();
+            var phrases = (await phraseRepository.FindPhrasesAsync(PhraseType.Cute)).Select(item => item.Value);
+
+            string selectedPhrase = phrases.Random();
 
             if(selectedPhrase.Contains("{0}", StringComparison.InvariantCultureIgnoreCase))
             {

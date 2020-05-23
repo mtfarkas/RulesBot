@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RulesBot.Data.Entities;
+using System;
 
 namespace RulesBot.Data.EntityConfiguration
 {
@@ -12,11 +14,16 @@ namespace RulesBot.Data.EntityConfiguration
 
             phrase.HasKey(item => item.Id);
 
-            phrase.Property(item => item.Type).IsRequired();
-            phrase.Property(item => item.Value).IsRequired();
-            phrase.Property(item => item.AddedOn).IsRequired();
+            var enumConverter = new ValueConverter<PhraseType, string>(
+                v => v.ToString(),
+                v => (PhraseType)Enum.Parse(typeof(PhraseType), v)
+            );
 
-            phrase.Property(item => item.AddedBy).IsRequired(false);
+            phrase.Property(item => item.Type)
+                .HasConversion(enumConverter)
+                .IsRequired();
+
+            phrase.Property(item => item.Value).IsRequired();
         }
     }
 }

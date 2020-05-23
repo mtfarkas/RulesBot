@@ -4,15 +4,18 @@ namespace RulesBot.Data.Entities
 {
     public enum PhraseType
     {
-
+        Unknown,
+        Verb,
+        Rule2,
+        Cute,
+        Wednesday,
+        Streets
     }
 
     public class Phrase
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public PhraseType Type { get; set; }
         public string Value { get; set; }
-        public string AddedBy { get; set; }
-        public DateTime AddedOn { get; set; }
     }
 }

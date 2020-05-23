@@ -1,5 +1,8 @@
 ﻿using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using YAUL.Data;
 
@@ -22,6 +25,16 @@ namespace RulesBot.MessageHandlers
             }
 
             return Result.Fail("No handler found for message.");
+        }
+
+        public static void RegisterAssemblyHandlers(Assembly asm, IServiceCollection services)
+        {
+            var eligibleTypes = asm.DefinedTypes.Where(t => !t.IsInterface && !t.IsAbstract && typeof(IMessageHandler).IsAssignableFrom(t));
+
+            foreach(var type in eligibleTypes)
+            {
+                services.AddScoped(type);
+            }
         }
     }
 }

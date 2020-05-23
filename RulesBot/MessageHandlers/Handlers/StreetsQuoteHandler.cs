@@ -1,6 +1,8 @@
 ﻿using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
+using RulesBot.Core.Repositories;
+using RulesBot.Data.Entities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,17 +18,19 @@ namespace RulesBot.MessageHandlers.Handlers
             "1 12",
         };
 
-        private AppConfig Configuration;
-        public StreetsQuoteHandler()
+        private readonly IPhraseRepository phraseRepository;
+        public StreetsQuoteHandler(IPhraseRepository phraseRepository)
         {
-            Configuration = ConfigurationHost.Current;
+            this.phraseRepository = phraseRepository;
         }
 
         public async Task<bool> Execute(SocketUserMessage message)
         {
             if (!TriggerWords.Any(item => message.Content.Contains(item, StringComparison.InvariantCultureIgnoreCase))) return false;
 
-            string selectedQuote = Configuration.StreetsQuotes.Random();
+            var quotes = (await phraseRepository.FindPhrasesAsync(PhraseType.Streets)).Select(item => item.Value).Shuffle();
+
+            string selectedQuote = quotes.Random();
 
             await message.Channel.SendMessageAsync(selectedQuote);
 

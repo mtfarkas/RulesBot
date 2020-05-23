@@ -35,11 +35,11 @@ namespace RulesBot
             Configuration = ConfigurationHost.Current;
 
             MessageExecutor = new MessageExecutor();
-            MessageExecutor.RegisterHandler(new Rule2Handler());
-            MessageExecutor.RegisterHandler(new CuteChatHandler());
-            MessageExecutor.RegisterHandler(new StreetsQuoteHandler());
+            MessageExecutor.RegisterHandler(DIHost.Get<Rule2Handler>());
+            MessageExecutor.RegisterHandler(DIHost.Get<CuteChatHandler>());
+            MessageExecutor.RegisterHandler(DIHost.Get<StreetsQuoteHandler>());
 
-            MessageExecutor.RegisterHandler(new RandomVerbHandler());
+            MessageExecutor.RegisterHandler(DIHost.Get<RandomVerbHandler>());
 
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
@@ -61,7 +61,7 @@ namespace RulesBot
             Client.Log += DiscordClientLog;
             Client.MessageReceived += HandleDiscordMessage;
 
-            if(!Program.IsDebug) StreamNotifier = new StreamNotifier(Client);
+            if (!Program.IsDebug) StreamNotifier = new StreamNotifier(Client);
         }
         #endregion
 
@@ -138,7 +138,7 @@ namespace RulesBot
                 && Configuration.BotSettings.BlacklistedChannels.Contains(msg.Channel.Id)) return;
 
             //if (msg.HasCharPrefix(Configuration.BotSettings.CommandCharacter, ref argPos) )
-            if (msg.ContainsCommand(Configuration.BotSettings.CommandCharacter, ref argPos) )
+            if (msg.ContainsCommand(Configuration.BotSettings.CommandCharacter, ref argPos))
             {
                 Log.Info($"Message {msg.Content} was a command, attempting to execute");
                 var context = new SocketCommandContext(Client, msg);
