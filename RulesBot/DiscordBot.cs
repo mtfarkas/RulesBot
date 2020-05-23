@@ -4,6 +4,7 @@ using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
 using RulesBot.Core.Extensions;
+using RulesBot.Core.Repositories;
 using RulesBot.Data;
 using RulesBot.MessageHandlers;
 using RulesBot.MessageHandlers.Handlers;
@@ -28,9 +29,8 @@ namespace RulesBot
         #endregion
 
         #region Ctor
-        public DiscordBot(/*RulesBotContext context*/)
+        public DiscordBot(ITwitchRepository twitchRepository)
         {
-            //Context = context;
 
             Configuration = ConfigurationHost.Current;
 
@@ -61,7 +61,7 @@ namespace RulesBot
             Client.Log += DiscordClientLog;
             Client.MessageReceived += HandleDiscordMessage;
 
-            if (!Program.IsDebug) StreamNotifier = new StreamNotifier(Client);
+            StreamNotifier = new StreamNotifier(Client, twitchRepository);
         }
         #endregion
 
@@ -76,7 +76,7 @@ namespace RulesBot
 
             await Client.StartAsync();
 
-            StreamNotifier?.Start();
+            await StreamNotifier.Start();
         }
         #endregion
 

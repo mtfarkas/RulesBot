@@ -7,6 +7,7 @@ namespace RulesBot.Data
     public class RulesBotContext: DbContext
     {
         public DbSet<Phrase> Phrases { get; set; }
+        public DbSet<TwitchFriend> TwitchFriends { get; set; }
 
         public RulesBotContext(DbContextOptions<RulesBotContext> options): base(options)
         { }

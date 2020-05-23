@@ -6,9 +6,6 @@ namespace RulesBot.Core.Data
     {
         public BotSettings BotSettings { get; set; }
         public StreamNotifierSettings StreamNotifierSettings { get; set; }
-
-        public IEnumerable<string> Verbs { get; set; }
-        public IEnumerable<string> TwitchFriends { get; set; }
     }
 
     public class BotSettings

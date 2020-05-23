@@ -1,6 +1,7 @@
 ﻿using Discord.WebSocket;
 using RulesBot.Core;
 using RulesBot.Core.Data;
+using RulesBot.Core.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
 using TwitchLib.Api;
@@ -16,8 +17,10 @@ namespace RulesBot
         private readonly LiveStreamMonitorService LiveStreamMonitor;
         private readonly TwitchAPI TwitchAPI;
         private readonly AppConfig Configuration;
-        public StreamNotifier(DiscordSocketClient discordClient)
+        private readonly ITwitchRepository twitchRepository;
+        public StreamNotifier(DiscordSocketClient discordClient, ITwitchRepository twitchRepository)
         {
+            this.twitchRepository = twitchRepository;
             Configuration = ConfigurationHost.Current;
 
             DiscordClient = discordClient;
@@ -27,26 +30,35 @@ namespace RulesBot
             TwitchAPI.Settings.AccessToken = EnvUtils.VariableOrThrow(Constants.Environment.TwitchBotToken);
 
             LiveStreamMonitor = new LiveStreamMonitorService(TwitchAPI, 20);
-            LiveStreamMonitor.SetChannelsByName(Configuration.TwitchFriends.ToList());
 
             LiveStreamMonitor.OnStreamOnline += async (s, e) =>
             {
                 await LiveStreamMonitor_OnStreamOnline(e);
             };
 
-            ConfigurationHost.ConfigurationChanged += ConfigurationChanged;
+            TwitchRepository.TwitchFriendListChanged += async (s, e) =>
+            {
+                await TwitchRepository_TwitchFriendListChanged();
+            };
         }
 
-        private void ConfigurationChanged(object sender, YAUL.Data.GenericEventArgs<AppConfig> e)
+        private async Task TwitchRepository_TwitchFriendListChanged()
         {
-            if (e.Value.StreamNotifierSettings.Enabled) Start();
-            else Stop();
+            Log.Info("Twitch friend list changed, restarting live stream monitor");
+            Stop();
+
+            await Start();
+            Log.Info("Live stream monitor restart done!");
         }
 
-        public void Start()
+        public async Task Start()
         {
             if(Configuration.StreamNotifierSettings.Enabled && !LiveStreamMonitor.Enabled)
             {
+                LiveStreamMonitor.ChannelsToMonitor?.Clear();
+                var channels = await twitchRepository.FindAllTwitchFriendsAsync();
+                LiveStreamMonitor.SetChannelsByName(channels.ToList());
+
                 Log.Info("LiveStreamMonitor started");
                 LiveStreamMonitor.Start();
             }

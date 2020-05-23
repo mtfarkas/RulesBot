@@ -16,7 +16,8 @@ namespace RulesBot.Core
         public static void Initialize()
         {
             fsWatcher.Path = PathUtils.MakeAbsolute("Assets", "config");
-            fsWatcher.Filters.Add("*.json");
+            if(Program.IsDebug) fsWatcher.Filters.Add("config.development.json");
+            else fsWatcher.Filters.Add("config.json");
             fsWatcher.NotifyFilter = NotifyFilters.LastWrite;
             fsWatcher.Changed += OnConfigurationChange;
 

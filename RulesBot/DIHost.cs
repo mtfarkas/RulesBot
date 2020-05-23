@@ -31,6 +31,7 @@ namespace RulesBot
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IPhraseRepository, PhraseRepository>();
+            services.AddScoped<ITwitchRepository, TwitchRepository>();
             services.AddScoped<DiscordBot>();
         }
 
