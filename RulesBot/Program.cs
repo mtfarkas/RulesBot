@@ -46,7 +46,7 @@ namespace RulesBot
 
             EnsureDirectories();
 
-            LogFile = PathUtils.MakeAbsolute("logs", $"log_{Program.Started:yyyyMMddHHmmss}.log");
+            LogFile = PathUtils.MakeAbsolute("logs", $"log_{Program.Started:yyyy_MM_dd__HH_mm_ss}.log");
 
 
             var bot = DIHost.Get<DiscordBot>();

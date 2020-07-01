@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using RulesBot.Core;
 using RulesBot.Core.Repositories;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RulesBot.Commands
@@ -31,6 +32,14 @@ namespace RulesBot.Commands
 
             if (result) await Context.Channel.SendMessageAsync($"Channel {channel} successfully removed from the livestream monitor");
             else await Context.Channel.SendMessageAsync($"Error removing channel or it's not present");
+        }
+
+        [Command("list")]
+        public async Task List()
+        {
+            var result = await twitchRepository.FindAllTwitchFriendsAsync();
+
+            await Context.Channel.SendMessageAsync($"Stream notifications are on for the following channels:\r\n ${string.Join("\r\n", result)}");
         }
     }
 }

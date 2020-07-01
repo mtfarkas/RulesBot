@@ -2,11 +2,15 @@
   "BotSettings": {
     "CommandCharacter": "!",
     "EnableChannelBlacklist": false,
-    "BlacklistedChannels": []
+    "BlacklistedChannels": [
+      628345341246308381,
+      639526578690195505,
+      629092499402522635
+    ]
   },
   "StreamNotifierSettings": {
     "Enabled": true,
-    "NotificationGuild": 129971607132176384,
+    "NotificationGuild": 628327466284351510,
     "NotificationChannel": 628342029424001024
   }
 }
