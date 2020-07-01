@@ -20,23 +20,29 @@ namespace RulesBot.Commands
         {
             try
             {
-
                 SocketGuildUser user = GetUser(mentioned);
-                if (user == null) await Context.Channel.SendMessageAsync("I'm afraid I can't do that :(");
+                if (user == null)
+                {
+                    var caller = Context.User as SocketGuildUser;
+                    string name = caller?.Nickname ?? Context.User.Username;
+                    await Context.Channel.SendMessageAsync($"I'm afraid I can't do that, {name}");
+                }
                 else await SetNickname(user, nickName);
+
+                await Context.Channel.SendMessageAsync("Your wish is my command");
             }
             catch (Exception ex)
             {
                 var caller = Context.User as SocketGuildUser;
                 string name = caller?.Nickname ?? Context.User.Username;
-                await Context.Channel.SendMessageAsync($"I'm sorry ${name}, I'm afraid I cannot do that.");
+                await Context.Channel.SendMessageAsync($"I'm afraid I can't do that, {name}");
                 Log.Exception(ex); 
             }
         }
 
         [Command("clear")]
-        public Task Clear(string nickName, string mentioned = null)
-            => Add(null, mentioned);
+        public Task Clear(string mentioned = null)
+            => Add(string.Empty, mentioned);
 
         private SocketGuildUser GetUser(string mention)
         {
