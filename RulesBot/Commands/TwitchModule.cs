@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using RulesBot.Core;
+using RulesBot.Core.Extensions;
 using RulesBot.Core.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace RulesBot.Commands
         [Command("add")]
         public async Task Add(string channel)
         {
-            var result = await twitchRepository.AddTwitchFriendAsync(channel);
+            var result = await twitchRepository.AddTwitchFriendAsync(channel.Sanitize());
 
             if (result) await Context.Channel.SendMessageAsync($"Channel {channel} successfully added to the livestream monitor");
             else await Context.Channel.SendMessageAsync($"Error adding channel or it's already added");
@@ -28,7 +29,7 @@ namespace RulesBot.Commands
         [Command("remove")]
         public async Task Remove(string channel)
         {
-            var result = await twitchRepository.RemoveTwitchFriendAsync(channel);
+            var result = await twitchRepository.RemoveTwitchFriendAsync(channel.Sanitize());
 
             if (result) await Context.Channel.SendMessageAsync($"Channel {channel} successfully removed from the livestream monitor");
             else await Context.Channel.SendMessageAsync($"Error removing channel or it's not present");
@@ -39,7 +40,7 @@ namespace RulesBot.Commands
         {
             var result = await twitchRepository.FindAllTwitchFriendsAsync();
 
-            await Context.Channel.SendMessageAsync($"Stream notifications are on for the following channels:\r\n ${string.Join("\r\n", result)}");
+            await Context.Channel.SendMessageAsync($"Stream notifications are on for the following channels:\r\n {string.Join("\r\n", result)}");
         }
     }
 }
