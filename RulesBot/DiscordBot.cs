@@ -137,6 +137,12 @@ namespace RulesBot
             if (Configuration.BotSettings.EnableChannelBlacklist
                 && Configuration.BotSettings.BlacklistedChannels.Contains(msg.Channel.Id)) return;
 
+            // ignore code blocks
+            if(msg.Content.Contains('`'))
+            {
+                return;
+            }
+
             //if (msg.HasCharPrefix(Configuration.BotSettings.CommandCharacter, ref argPos) )
             if (msg.ContainsCommand(Configuration.BotSettings.CommandCharacter, ref argPos))
             {

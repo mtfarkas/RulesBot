@@ -1,6 +1,9 @@
 ﻿using RulesBot.Core;
 using System;
 using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using YAUL.Utilities;
@@ -30,6 +33,8 @@ namespace RulesBot
 
         public async static Task Main()
         {
+            //ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateCertificate);
+
             Log.LogEmitted += Log_LogEmitted;
             Log.Info("RulesBot started, press ^C to exit");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -57,6 +62,11 @@ namespace RulesBot
             bot.Dispose();
 
             Log.Info("RulesBot exited gracefully");
+        }
+
+        private static bool ValidateCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        {
+            return true;
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
